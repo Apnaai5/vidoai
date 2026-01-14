@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>VIDOAI – AI Cartoon Video Converter</title>
+  <title>VIDOAI – AI Cartoon Video</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="text-align:center;font-family:Arial;padding:20px;">
@@ -10,16 +10,27 @@
   <h1>VIDOAI</h1>
   <p>Short Video को AI Cartoon और Animation में बदलें</p>
 
-  <input type="file" accept="video/*">
+  <input type="file" id="videoInput" accept="video/*">
   <br><br>
 
-  <button style="padding:10px 20px;font-size:16px;">
+  <button onclick="convertVideo()" 
+    style="padding:10px 20px;font-size:16px;">
     Convert to AI Cartoon
   </button>
 
-  <p style="margin-top:20px;color:gray;">
-    (AI processing next step में जोड़ा जाएगा)
-  </p>
+  <p id="status" style="margin-top:20px;color:green;"></p>
+
+<script>
+function convertVideo(){
+  var file = document.getElementById('videoInput').files[0];
+  if(!file){
+    alert("पहले video select करो");
+    return;
+  }
+  document.getElementById('status').innerText =
+    "AI processing chal rahi hai... (demo)";
+}
+</script>
 
 </body>
 </html>
