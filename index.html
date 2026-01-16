@@ -2,20 +2,20 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<title>VIDOAI – Video to Cartoon</title>
+<title>VIDOAI – Video to Cartoon Demo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body style="text-align:center;font-family:Arial;padding:20px;">
 
 <h1>VIDOAI</h1>
-<p>Video upload करो → Frame निकलेगा → AI Cartoon बनेगा</p>
+<p>Video upload करो → Frame निकलेगा → Demo AI दिखेगा</p>
 
 <input type="file" id="videoInput" accept="video/*">
 <br><br>
 
 <button onclick="extractFrame()" style="padding:10px 20px;font-size:16px;">
-Video से Image निकालो
+Video से Frame निकालो
 </button>
 
 <br><br>
@@ -49,7 +49,7 @@ function extractFrame(){
     img.style.display = "block";
 
     document.getElementById("status").innerText =
-      "Frame निकल गया — अब इसे AI Cartoon में बदला जाएगा (next step)";
+      "Frame निकल गया — अब इसे AI Cartoon में बदला जाएगा (Demo)";
   };
 }
 </script>
