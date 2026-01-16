@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>VIDOAI – AI Cartoon Video</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>VIDOAI – Video to Cartoon</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body style="text-align:center;font-family:Arial;padding:20px;">
 
-  <h1>VIDOAI</h1>
-  <p>Short Video को AI Cartoon और Animation में बदलें</p>
+<h1>VIDOAI</h1>
+<p>Video upload करो → Frame निकलेगा → AI Cartoon बनेगा</p>
 
-  <input type="file" id="videoInput" accept="video/*">
-  <br><br>
+<input type="file" id="videoInput" accept="video/*">
+<br><br>
 
-  <button onclick="convertVideo()" 
-    style="padding:10px 20px;font-size:16px;">
-    Convert to AI Cartoon
-  </button>
+<button onclick="extractFrame()" style="padding:10px 20px;font-size:16px;">
+Video से Image निकालो
+</button>
 
-  <p id="status" style="margin-top:20px;color:green;"></p>
+<br><br>
+<canvas id="canvas" style="display:none;"></canvas>
+<img id="frameImage" style="max-width:100%;margin-top:20px;display:none;"/>
+
+<p id="status"></p>
 
 <script>
-function convertVideo(){
-  var file = document.getElementById('videoInput').files[0];
-  if(!file){
+function extractFrame(){
+  const videoFile = document.getElementById("videoInput").files[0];
+  if(!videoFile){
     alert("पहले video select करो");
     return;
   }
-  document.getElementById('status').innerText =
-    "AI processing chal rahi hai... (demo)";
+
+  const video = document.createElement("video");
+  video.src = URL.createObjectURL(videoFile);
+  video.muted = true;
+  video.currentTime = 1;
+
+  video.onloadeddata = () => {
+    const canvas = document.getElementById("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    const img = document.getElementById("frameImage");
+    img.src = canvas.toDataURL("image/png");
+    img.style.display = "block";
+
+    document.getElementById("status").innerText =
+      "Frame निकल गया — अब इसे AI Cartoon में बदला जाएगा (next step)";
+  };
 }
 </script>
 
